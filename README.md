@@ -21,6 +21,10 @@ Sustain City is an AI-powered sustainability platform designed to promote smarte
 
 ---
 
+## Deployment
+- Vercel App
+- [Sustain City](https://sustain-city-v9o3.vercel.app/)
+
 ## ⚙️ Setup
 
 ```bash
