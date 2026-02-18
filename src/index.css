@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 230 30% 14%;
+    --foreground: 214 32% 91%;
+
+    --card: 222 44% 16%;
+    --card-foreground: 214 32% 91%;
+
+    --popover: 222 44% 16%;
+    --popover-foreground: 214 32% 91%;
+
+    --primary: 348 80% 59%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 222 60% 22%;
+    --secondary-foreground: 214 32% 91%;
+
+    --muted: 222 44% 20%;
+    --muted-foreground: 215 17% 63%;
+
+    --accent: 166 100% 42%;
+    --accent-foreground: 230 30% 14%;
+
+    --destructive: 348 80% 59%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 60% 19%;
+    --input: 214 60% 19%;
+    --ring: 348 80% 59%;
+
+    --radius: 0px;
+
+    /* Game-specific tokens */
+    --game-grass: 140 25% 39%;
+    --game-grass-dark: 140 28% 33%;
+    --game-sky: 240 30% 14%;
+    --game-panel: 222 44% 16%;
+    --game-panel-border: 214 60% 22%;
+    --game-gold: 36 90% 55%;
+    --game-teal: 166 100% 42%;
+    --game-green: 135 60% 65%;
+    --game-red: 348 80% 59%;
+    --game-pollution: 35 60% 20%;
+
+    --sidebar-background: 222 44% 16%;
+    --sidebar-foreground: 214 32% 91%;
+    --sidebar-primary: 348 80% 59%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 44% 20%;
+    --sidebar-accent-foreground: 214 32% 91%;
+    --sidebar-border: 214 60% 19%;
+    --sidebar-ring: 348 80% 59%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    border-radius: 0 !important;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Press Start 2P', cursive;
+    image-rendering: pixelated;
+  }
+}
+
+/* Pixel border utility */
+.pixel-border {
+  border: 2px solid hsl(var(--game-panel-border));
+  box-shadow: 4px 4px 0px #000;
+}
+
+.pixel-border-accent {
+  border: 2px solid hsl(var(--primary));
+  box-shadow: 4px 4px 0px #000;
+}
+
+/* Pixel button hover */
+.pixel-hover {
+  transition: transform 0.1s, background-color 0.1s;
+}
+.pixel-hover:hover {
+  transform: translate(-2px, -2px);
+}
+.pixel-hover:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px #000 !important;
+}
+
+/* Grass checkerboard */
+.grass-tile {
+  background-color: hsl(var(--game-grass));
+  background-image:
+    linear-gradient(45deg, hsl(var(--game-grass-dark)) 25%, transparent 25%),
+    linear-gradient(-45deg, hsl(var(--game-grass-dark)) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, hsl(var(--game-grass-dark)) 75%),
+    linear-gradient(-45deg, transparent 75%, hsl(var(--game-grass-dark)) 75%);
+  background-size: 50% 50%;
+  background-position: 0 0, 0 50%, 50% -50%, -50% 0;
+}
+
+/* Inactive building pulse */
+@keyframes inactive-pulse {
+  0%, 100% { border-color: hsl(var(--game-red)); }
+  50% { border-color: transparent; }
+}
+.inactive-pulse {
+  animation: inactive-pulse 1s ease-in-out infinite;
+  border: 2px solid hsl(var(--game-red));
+}
+
+/* Floating text animations */
+@keyframes float-up {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-40px); }
+}
+.float-up {
+  animation: float-up 1.2s ease-out forwards;
+}
+
+/* Bounce in for building placement */
+@keyframes bounce-in {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+.bounce-in {
+  animation: bounce-in 0.3s ease-out;
+}
+
+/* Gold flash */
+@keyframes gold-flash {
+  0%, 100% { color: hsl(var(--game-gold)); }
+  50% { color: hsl(0 0% 100%); }
+}
+.gold-flash {
+  animation: gold-flash 0.3s ease-in-out;
+}
+
+/* Mission complete banner */
+@keyframes banner-slide {
+  0% { transform: translateY(-100%); opacity: 0; }
+  15% { transform: translateY(0); opacity: 1; }
+  85% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100%); opacity: 0; }
+}
+.banner-slide {
+  animation: banner-slide 2.5s ease-in-out forwards;
+}
+
+/* Level up banner */
+@keyframes level-up {
+  0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+  50% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+  70% { transform: scale(0.95) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.level-up-anim {
+  animation: level-up 0.6s ease-out forwards;
+}
+
+/* Cycle pulse */
+@keyframes cycle-pulse {
+  0% { box-shadow: inset 0 0 0 0 hsl(var(--game-green) / 0.4); }
+  50% { box-shadow: inset 0 0 0 2px hsl(var(--game-green) / 0.4); }
+  100% { box-shadow: inset 0 0 0 0 hsl(var(--game-green) / 0.0); }
+}
+.cycle-pulse {
+  animation: cycle-pulse 0.5s ease-out;
+}
+
+/* Gold panel flash */
+@keyframes panel-gold-flash {
+  0%, 100% { background-color: hsl(var(--game-panel)); }
+  50% { background-color: hsl(var(--game-gold) / 0.3); }
+}
+.panel-gold-flash {
+  animation: panel-gold-flash 0.4s ease-in-out 3;
+}
+
+/* Happy shimmer */
+@keyframes happy-shimmer {
+  0%, 100% { box-shadow: inset 0 0 6px hsl(36 90% 55% / 0); }
+  50% { box-shadow: inset 0 0 6px hsl(36 90% 55% / 0.4); }
+}
+.happy-shimmer {
+  animation: happy-shimmer 2s ease-in-out infinite;
+}
+
+/* Abandonment blink */
+@keyframes abandon-blink {
+  0%, 100% { border-color: hsl(var(--game-red)); }
+  50% { border-color: transparent; }
+}
+.abandon-blink {
+  animation: abandon-blink 0.8s ease-in-out infinite;
+  border: 2px solid hsl(var(--game-red));
+}
+
+/* Scrollbar pixel style */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--game-panel));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--game-panel-border));
+  border: 1px solid #000;
+}
+
+/* Mayor Maya pulse */
+@keyframes maya-pulse {
+  0%, 100% { box-shadow: 4px 4px 0 #000, 0 0 8px hsl(var(--game-teal) / 0.5); }
+  50%       { box-shadow: 4px 4px 0 #000, 0 0 18px hsl(var(--game-teal) / 0.9); }
+}
+
+/* Cursor blink for typewriter */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
