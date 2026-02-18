@@ -672,6 +672,7 @@ export function useGameState() {
 
   return {
     state,
+    setState,
     floatingTexts,
     missionCompleteId,
     levelUpFlag,

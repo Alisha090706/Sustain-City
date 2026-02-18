@@ -11,7 +11,7 @@ import { supabase } from '@/lib/supabase';
 
 const Index = () => {
   const {
-    state, dispatch, floatingTexts, missionCompleteId, levelUpFlag, cyclePulse,
+    state, setState, floatingTexts, missionCompleteId, levelUpFlag, cyclePulse,
     crisisBanner, currentMission, xpProgress,
     selectBuilding, toggleDemolish, placeBuilding,
   } = useGameState();
@@ -25,34 +25,33 @@ const Index = () => {
   async function loadGame() {
     if (!user) return;
 
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('game_saves')
       .select('*')
       .eq('user_id', user.id)
       .maybeSingle();
 
     if (data) {
-      dispatch({
-        type: 'LOAD_GAME',
-        payload: {
-          grid: data.grid_state,
-          money: data.money,
-          xp: data.xp,
-          level: data.level,
-          cycles: data.cycle,
-          avgHappiness: data.avg_happiness,
-          avgPollution: data.avg_pollution,
-          totalIncomeEarned: data.total_income_earned,
-          currentMissionIndex: data.missions_progress?.currentMissionIndex || 0,
-          completedMissions: data.missions_progress?.completedMissions || [],
-          unlockedBuildings: data.unlocked_buildings,
-        },
-      });
+      setState(prev => ({
+        ...prev,
+        grid: data.grid_state,
+        money: data.money,
+        xp: data.xp,
+        level: data.level,
+        cycles: data.cycle,
+        avgHappiness: data.avg_happiness,
+        avgPollution: data.avg_pollution,
+        totalIncomeEarned: data.total_income_earned,
+        currentMissionIndex: data.missions_progress?.currentMissionIndex || 0,
+        completedMissions: data.missions_progress?.completedMissions || [],
+        unlockedBuildings: data.unlocked_buildings,
+      }));
     }
   }
 
   loadGame();
 }, [user]);
+
 
   // Auto-save every cycle (every 5s) when logged in
   useEffect(() => {
