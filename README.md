@@ -14,7 +14,7 @@ Sustain City is a sustainability platform designed to promote smarter and greene
 
 ## 🛠️ Tech Stack
 - Frontend: React + TypeScript (Vite)
-- Backend: Firbase
+- Backend: SupaBase
 - Database: PostgreSQL/SQL
 
 
