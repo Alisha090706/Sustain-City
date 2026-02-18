@@ -1,13 +1,12 @@
 # 🌱 Sustain City
 
-Sustain City is an AI-powered sustainability platform designed to promote smarter and greener urban living. It helps users make data-driven environmental decisions through intelligent insights and automation.
+Sustain City is a sustainability platform designed to promote smarter and greener urban living. It helps users make data-driven environmental decisions through intelligent insights and automation.
 
 ---
 
 ## 🚀 Features
 - Secure authentication
 - Dynamic sustainability dashboard
-- AI-powered recommendations (Gemini integration)
 - Real-time API-based insights
 - Smart automation workflows
 
@@ -15,9 +14,9 @@ Sustain City is an AI-powered sustainability platform designed to promote smarte
 
 ## 🛠️ Tech Stack
 - Frontend: React + TypeScript (Vite)
-- Backend: Node.js + Express
-- Database: MongoDB / PostgreSQL
-- AI: Gemini API
+- Backend: Firbase
+- Database: PostgreSQL/SQL
+
 
 ---
 
